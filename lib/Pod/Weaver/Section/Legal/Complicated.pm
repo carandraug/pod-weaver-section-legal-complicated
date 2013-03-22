@@ -99,6 +99,9 @@ has head => (
   default => 1,
 );
 
+=for Pod::Coverage _extract_comments
+=cut
+
 sub _extract_comments {
   my (undef, $input, $tag) = @_;
   my $ppi_document = $input->{ppi_document};
@@ -114,6 +117,9 @@ sub _extract_comments {
   });
   return @comments;
 }
+
+=for Pod::Coverage weave_section
+=cut
 
 sub weave_section {
   my ($self, $document, $input) = @_;
