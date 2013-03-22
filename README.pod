@@ -1,0 +1,77 @@
+=head1 NAME
+
+Pod::Weaver::Section::Legal::Complicated - add a pod section with multiple authors, copyright owners and licenses in a file basis
+
+=head1 VERSION
+
+version 1.00
+
+=head1 SYNOPSIS
+
+In your F<weaver.ini>
+
+  [Legal::Complicated]
+
+=head1 DESCRIPTION
+
+This plugin is aimed at distributions that have several files, each of them with
+possibly different authors, copyright owners and licenses.
+
+It will look for these values in comments of the source code (analyzed
+through a C<ppi_document>) with the following form:
+
+  # AUTHOR:  John Doe <john.doe@otherside.com>
+  # AUTHOR:  Mary Jane <mary.jane@thisside.com>
+  # OWNER:   University of Over Here
+  # OWNER:   Mary Jane
+  # LICENSE: GPL_3
+
+This example would generate the following POD:
+
+  =head1 Legal
+
+  =head2 Authors
+
+  John Doe <john.doe@otherside.com>
+  Mary Jane <mary.jane@thisside.com>
+
+  =head2 Copyright and License
+
+  This software is copyright of University of Over Here, and Mary Jane, and
+  released under the license of The GNU General Public License, Version 3,
+  June 2007
+
+Note that this plugin makes a distinction between the authors (whoever wrote the
+code), and the actual copyright owners (possibly the person who paid them to
+write it).
+
+I am not a lawyer myself, any feedback on better ways to deal with this kind of
+situations is most welcome.
+
+=head1 ATTRIBUTES
+
+=head2 add_dist_license
+
+If true, it will also add the distribution license to each of the files.
+Defaults to false.
+
+=head2 head
+
+Sets the heading level for the legal section. Defaults to 1.
+
+=for Pod::Coverage _extract_comments
+
+=for Pod::Coverage weave_section
+
+=head1 AUTHOR
+
+Carnë Draug <cdraug@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2013 by Carnë Draug.
+
+This is free software, licensed under:
+
+  The GNU General Public License, Version 3, June 2007
+

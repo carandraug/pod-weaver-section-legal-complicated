@@ -2,4 +2,6 @@ Summary of important user-visible changes for Pod::Weaver::Section::Legal::Compl
 ---------------------------------------------------------------------------------------
 
 {{$NEXT}}
+
+1.00      2013-03-22 18:26:00 Europe/Dublin
   * Initial release.
