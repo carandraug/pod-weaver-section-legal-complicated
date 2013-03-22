@@ -53,14 +53,14 @@ through a C<ppi_document>) with the following form:
 This example would generate the following POD:
 
   =head1 Legal
-  
+
   =head2 Authors
-  
+
   John Doe <john.doe@otherside.com>
   Mary Jane <mary.jane@thisside.com>
-  
+
   =head2 Copyright and License
-  
+
   This software is copyright of University of Over Here, and Mary Jane, and
   released under the license of The GNU General Public License, Version 3,
   June 2007
