@@ -112,7 +112,7 @@ sub _extract_comments {
   $ppi_document->find( sub {
     my $ppi_node = $_[1];
     if ($ppi_node->isa('PPI::Token::Comment') &&
-        $ppi_node->content =~ qr/^\s*#+\s*$tag:\s*(.+)$/m ) {
+        $ppi_node->content =~ qr/^\s*#+\s*$tag:\s*(.+?)\s*$/m ) {
       push (@comments, $1);
     }
     return 0;

@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 1;
+use Test::More tests => 2;
 use Test::Differences;
 use Moose::Autobox 0.10;
 
@@ -44,6 +44,19 @@ This software is Copyright (c) by University of Over Here, and Mary Jane and rel
 EOF
 
 eq_or_diff (weave ($in), $out);
+
+## test removal of trailing whitespace
+$in = <<'EOF';
+
+# AUTHOR:  John Doe <john.doe@otherside.com>   
+# AUTHOR:  Mary Jane <mary.jane@thisside.com>   
+# OWNER:   University of Over Here    
+# OWNER:   Mary Jane	
+# LICENSE: GPL_3
+
+EOF
+eq_or_diff (weave ($in), $out);
+
 
 sub weave {
   my $perl_source   = shift;
