@@ -61,9 +61,9 @@ This example would generate the following POD:
 
   =head2 COPYRIGHT
 
-  This software is copyright of University of Over Here, and Mary Jane, and
-  released under the license of The GNU General Public License, Version 3,
-  June 2007
+  This software is copyright (c) by University of Over Here, and Mary Jane.
+
+  This software is available under The GNU General Public License, Version 3, June 2007.
 
 Note that this plugin makes a distinction between the authors (whoever wrote the
 code), and the actual copyright owners (possibly the person who paid them to
@@ -147,16 +147,17 @@ sub weave_section {
   Carp::croak "Unable to find a copyright owner for $filename" unless scalar (@owners);
   Carp::croak "Unable to find a copyright license for $filename" unless scalar (@licenses);
 
-  my $author_text  = join ("\n\n", @authors);
+  my ($author_text, $license_text);
+
+  $author_text  = join ("\n\n", @authors);
 
   ## One day, we might need a more complex legal text but in the mean
   ## time, this is fine to avoid repeated entries
   @licenses = uniq (map { $_->name } @licenses);
 
-  my $license_text = "This software is Copyright (c) by ".
-                      join (", and ", @owners) .
-                     " and released under the license of " .
-                      join (", and ", @licenses);
+  $license_text .= "This software is copyright (c) by ". join (", and ", @owners) . ".\n";
+  $license_text .= "\n";
+  $license_text .= "This software is available under " . join (", and ", @licenses) . ".";
 
   push ($document->children, Pod::Elemental::Element::Nested->new({
     command  => "head" . $self->head,

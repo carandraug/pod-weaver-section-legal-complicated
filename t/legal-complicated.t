@@ -36,7 +36,9 @@ Mary Jane <mary.jane@thisside.com>
 
 =head1 COPYRIGHT
 
-This software is Copyright (c) by University of Over Here, and Mary Jane and released under the license of The GNU General Public License, Version 3, June 2007
+This software is copyright (c) by University of Over Here, and Mary Jane.
+
+This software is available under The GNU General Public License, Version 3, June 2007.
 
 =cut
 EOF

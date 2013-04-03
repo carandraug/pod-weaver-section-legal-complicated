@@ -2,6 +2,7 @@ Summary of important user-visible changes for Pod::Weaver::Section::Legal::Compl
 ---------------------------------------------------------------------------------------
 
 {{$NEXT}}
+  * The text in the COPYRIGHT section has changed slightly.
   * The POD sections AUTHOR and COPYRIGHT are now independent sections, instead
     of 2 subsections under LEGAL.
   * Trailing whitespace from the captured text is now ignored.
