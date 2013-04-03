@@ -54,14 +54,12 @@ through a C<ppi_document>) with the following form:
 
 This example would generate the following POD:
 
-  =head1 Legal
-
-  =head2 Authors
+  =head2 AUTHORS
 
   John Doe <john.doe@otherside.com>
   Mary Jane <mary.jane@thisside.com>
 
-  =head2 Copyright and License
+  =head2 COPYRIGHT
 
   This software is copyright of University of Over Here, and Mary Jane, and
   released under the license of The GNU General Public License, Version 3,
@@ -160,23 +158,17 @@ sub weave_section {
                      " and released under the license of " .
                       join (", and ", @licenses);
 
-  my $text = Pod::Elemental::Element::Nested->new({
+  push ($document->children, Pod::Elemental::Element::Nested->new({
     command  => "head" . $self->head,
-    content  => "LEGAL",
-    children => [
-      Pod::Elemental::Element::Nested->new({
-        command  => "head" . ($self->head +1),
-        content  => "Authors",
-        children => [Pod::Elemental::Element::Pod5::Ordinary->new({ content => $author_text })],
-      }),
-      Pod::Elemental::Element::Nested->new({
-        command  => "head" . ($self->head +1),
-        content  => "Copyright and License",
-        children => [Pod::Elemental::Element::Pod5::Ordinary->new({ content => $license_text })],
-      }),
-    ],
-  });
-  push ($document->children, $text);
+    content  => @authors > 1? "AUTHORS" : "AUTHOR",
+    children => [Pod::Elemental::Element::Pod5::Ordinary->new({ content => $author_text })],
+  }));
+
+  push ($document->children, Pod::Elemental::Element::Nested->new({
+    command  => "head" . $self->head,
+    content  => "COPYRIGHT",
+    children => [Pod::Elemental::Element::Pod5::Ordinary->new({ content => $license_text })],
+  }));
 }
 
 __PACKAGE__->meta->make_immutable;

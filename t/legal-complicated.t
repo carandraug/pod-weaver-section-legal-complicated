@@ -28,15 +28,13 @@ EOF
 $out = <<'EOF';
 =pod
 
-=head1 LEGAL
-
-=head2 Authors
+=head1 AUTHORS
 
 John Doe <john.doe@otherside.com>
 
 Mary Jane <mary.jane@thisside.com>
 
-=head2 Copyright and License
+=head1 COPYRIGHT
 
 This software is Copyright (c) by University of Over Here, and Mary Jane and released under the license of The GNU General Public License, Version 3, June 2007
 
