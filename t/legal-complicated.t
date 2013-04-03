@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 4;
 use Test::Differences;
 use Moose::Autobox 0.10;
 
@@ -12,20 +12,35 @@ use PPI;
 use Pod::Elemental;
 use Pod::Weaver;
 
-my ($in, $out);
+## basic usage
+eq_or_diff (weave (<<'IN'), <<'OUT');
+# AUTHOR:  Mary Jane <mary.jane@thisside.com>
+# OWNER:   Mary Jane
+# LICENSE: Perl_5
+IN
+=pod
 
+=head1 AUTHOR
 
-$in = <<'EOF';
+Mary Jane <mary.jane@thisside.com>
 
+=head1 COPYRIGHT
+
+This software is copyright (c) by Mary Jane.
+
+This software is available under the same terms as the perl 5 programming language system itself.
+
+=cut
+OUT
+
+## basic usage with multiple authors and owners
+eq_or_diff (weave (<<'IN'), <<'OUT');
 # AUTHOR:  John Doe <john.doe@otherside.com>
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   University of Over Here
 # OWNER:   Mary Jane
 # LICENSE: GPL_3
-
-EOF
-
-$out = <<'EOF';
+IN
 =pod
 
 =head1 AUTHORS
@@ -41,21 +56,58 @@ This software is copyright (c) by University of Over Here, and Mary Jane.
 This software is available under The GNU General Public License, Version 3, June 2007.
 
 =cut
-EOF
-
-eq_or_diff (weave ($in), $out);
+OUT
 
 ## test removal of trailing whitespace
-$in = <<'EOF';
-
+eq_or_diff (weave (<<'IN'), <<'OUT');
 # AUTHOR:  John Doe <john.doe@otherside.com>   
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>   
 # OWNER:   University of Over Here    
 # OWNER:   Mary Jane	
 # LICENSE: GPL_3
+IN
+=pod
 
-EOF
-eq_or_diff (weave ($in), $out);
+=head1 AUTHORS
+
+John Doe <john.doe@otherside.com>
+
+Mary Jane <mary.jane@thisside.com>
+
+=head1 COPYRIGHT
+
+This software is copyright (c) by University of Over Here, and Mary Jane.
+
+This software is available under The GNU General Public License, Version 3, June 2007.
+
+=cut
+OUT
+
+## multiple authors, owners, and licenses
+eq_or_diff (weave (<<'IN'), <<'OUT');
+# AUTHOR:  John Doe <john.doe@otherside.com>
+# AUTHOR:  Mary Jane <mary.jane@thisside.com>
+# OWNER:   University of Over Here
+# OWNER:   Mary Jane
+# LICENSE: GPL_3
+# LICENSE: Perl_5
+IN
+=pod
+
+=head1 AUTHORS
+
+John Doe <john.doe@otherside.com>
+
+Mary Jane <mary.jane@thisside.com>
+
+=head1 COPYRIGHT
+
+This software is copyright (c) by University of Over Here, and Mary Jane.
+
+This software is available under The GNU General Public License, Version 3, June 2007, and the same terms as the perl 5 programming language system itself.
+
+=cut
+OUT
 
 
 sub weave {
