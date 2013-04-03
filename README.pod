@@ -1,10 +1,12 @@
+=encoding utf-8
+
 =head1 NAME
 
 Pod::Weaver::Section::Legal::Complicated - add a pod section with multiple authors, copyright owners and licenses in a file basis
 
 =head1 VERSION
 
-version 1.00
+version 1.20
 
 =head1 SYNOPSIS
 
@@ -22,24 +24,22 @@ through a C<ppi_document>) with the following form:
 
   # AUTHOR:  John Doe <john.doe@otherside.com>
   # AUTHOR:  Mary Jane <mary.jane@thisside.com>
-  # OWNER:   University of Over Here
-  # OWNER:   Mary Jane
+  # OWNER:   2001-2005 University of Over Here
+  # OWNER:   2012 Mary Jane
   # LICENSE: GPL_3
 
 This example would generate the following POD:
 
-  =head1 Legal
-
-  =head2 Authors
+  =head2 AUTHORS
 
   John Doe <john.doe@otherside.com>
   Mary Jane <mary.jane@thisside.com>
 
-  =head2 Copyright and License
+  =head2 COPYRIGHT
 
-  This software is copyright of University of Over Here, and Mary Jane, and
-  released under the license of The GNU General Public License, Version 3,
-  June 2007
+  This software is copyright (c) 2001-2005 by University of Over Here, and 2012 by Mary Jane.
+
+  This software is available under The GNU General Public License, Version 3, June 2007.
 
 Note that this plugin makes a distinction between the authors (whoever wrote the
 code), and the actual copyright owners (possibly the person who paid them to
@@ -60,6 +60,9 @@ Defaults to false.
 Sets the heading level for the legal section. Defaults to 1.
 
 =for Pod::Coverage _extract_comments
+
+=for Pod::Coverage _join
+makes sure there's not too many "and" when there's too many entries
 
 =for Pod::Coverage weave_section
 
