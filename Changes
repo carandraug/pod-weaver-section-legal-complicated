@@ -2,6 +2,8 @@ Summary of important user-visible changes for Pod::Weaver::Section::Legal::Compl
 ---------------------------------------------------------------------------------------
 
 {{$NEXT}}
+  * We are now able to capture years from the OWNER part which is used on the
+    legal text.
   * The text in the COPYRIGHT section has changed slightly.
   * The POD sections AUTHOR and COPYRIGHT are now independent sections, instead
     of 2 subsections under LEGAL.

@@ -48,8 +48,8 @@ through a C<ppi_document>) with the following form:
 
   # AUTHOR:  John Doe <john.doe@otherside.com>
   # AUTHOR:  Mary Jane <mary.jane@thisside.com>
-  # OWNER:   University of Over Here
-  # OWNER:   Mary Jane
+  # OWNER:   2001-2005 University of Over Here
+  # OWNER:   2012 Mary Jane
   # LICENSE: GPL_3
 
 This example would generate the following POD:
@@ -61,7 +61,7 @@ This example would generate the following POD:
 
   =head2 COPYRIGHT
 
-  This software is copyright (c) by University of Over Here, and Mary Jane.
+  This software is copyright (c) 2001-2005 by University of Over Here, and 2012 by Mary Jane.
 
   This software is available under The GNU General Public License, Version 3, June 2007.
 
@@ -118,6 +118,21 @@ sub _extract_comments {
   return @comments;
 }
 
+=for Pod::Coverage _join
+makes sure there's not too many "and" when there's too many entries
+=cut
+
+sub _join {
+  my $text;
+  if (@_ == 1) {
+    $text = $_[0];
+  } else {
+    $text  = join (", ", @_[0 .. $#_ -1]);
+    $text .= ", and $_[-1]";
+  }
+  return $text;
+}
+
 =for Pod::Coverage weave_section
 =cut
 
@@ -133,7 +148,9 @@ sub weave_section {
     my $license = "Software::License::$_";
     eval {
       load $license;
-      $license = $license->new({holder => \@owners})
+      ## it doesn't matter who's the holder at this point. We just want the
+      ## pretty text for the license name
+      $license = $license->new({holder => "does not matter"})
     };
     Carp::croak "Possibly $_ license module not installed: $@" if $@;
     $license;
@@ -154,10 +171,24 @@ sub weave_section {
   ## One day, we might need a more complex legal text but in the mean
   ## time, this is fine to avoid repeated entries
   @licenses = uniq (map { $_->name } @licenses);
+  ## and make pretty English with year and owner names
+  @owners = map {
+    my $text;
+    ## there may be spaces and dashes on the years:
+    ##  2003, 2004
+    ##  2006-2007, 2008
+    ##
+    ## so it must start and end with numbers, but in the middle we allow spaces,
+    ## dashes and commas as well.
+    $_ =~ m/^([\d][\d\s\-,]*[\d])?\s*(.+)$/;
+    $text .= "$1 " if $1;
+    $text .= "by $2";
+    $text;
+  } @owners;
 
-  $license_text .= "This software is copyright (c) by ". join (", and ", @owners) . ".\n";
+  $license_text .= "This software is copyright (c) ". _join (@owners) . ".\n";
   $license_text .= "\n";
-  $license_text .= "This software is available under " . join (", and ", @licenses) . ".";
+  $license_text .= "This software is available under " . _join (@licenses) . ".";
 
   push ($document->children, Pod::Elemental::Element::Nested->new({
     command  => "head" . $self->head,
