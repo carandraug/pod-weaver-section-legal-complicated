@@ -170,7 +170,7 @@ sub weave_section {
 
   ## One day, we might need a more complex legal text but in the mean
   ## time, this is fine to avoid repeated entries
-  @licenses = uniq (map { $_->name } @licenses);
+  @licenses = uniq (map { lcfirst($_->name) } @licenses);
   ## and make pretty English with year and owner names
   @owners = map {
     my $text;

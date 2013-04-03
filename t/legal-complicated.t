@@ -53,7 +53,7 @@ Mary Jane <mary.jane@thisside.com>
 
 This software is copyright (c) by University of Over Here, and by Mary Jane.
 
-This software is available under The GNU General Public License, Version 3, June 2007.
+This software is available under the GNU General Public License, Version 3, June 2007.
 
 =cut
 OUT
@@ -78,7 +78,7 @@ Mary Jane <mary.jane@thisside.com>
 
 This software is copyright (c) by University of Over Here, and by Mary Jane.
 
-This software is available under The GNU General Public License, Version 3, June 2007.
+This software is available under the GNU General Public License, Version 3, June 2007.
 
 =cut
 OUT
@@ -104,7 +104,7 @@ Mary Jane <mary.jane@thisside.com>
 
 This software is copyright (c) by University of Over Here, and by Mary Jane.
 
-This software is available under The GNU General Public License, Version 3, June 2007, and the same terms as the perl 5 programming language system itself.
+This software is available under the GNU General Public License, Version 3, June 2007, and the same terms as the perl 5 programming language system itself.
 
 =cut
 OUT
@@ -126,7 +126,7 @@ Mary Jane <mary.jane@thisside.com>
 
 This software is copyright (c) 2005-2007 by University of Over Here, and 2006, 2010-2012 by Mary Jane.
 
-This software is available under The GNU General Public License, Version 3, June 2007.
+This software is available under the GNU General Public License, Version 3, June 2007.
 
 =cut
 OUT
@@ -157,7 +157,7 @@ Darcy <darcy@zombies.com>
 
 This software is copyright (c) 2005-2007 by University of Over Here, 2006, 2010-2012 by Mary Jane, and by Darcy.
 
-This software is available under The MIT (X11) License, The GNU General Public License, Version 3, June 2007, and the same terms as the perl 5 programming language system itself.
+This software is available under the MIT (X11) License, the GNU General Public License, Version 3, June 2007, and the same terms as the perl 5 programming language system itself.
 
 =cut
 OUT
