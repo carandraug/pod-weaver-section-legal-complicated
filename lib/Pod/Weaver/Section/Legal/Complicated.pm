@@ -1,4 +1,5 @@
 package Pod::Weaver::Section::Legal::Complicated;
+use utf8;
 ## Copyright (C) 2013 Carnë Draug <carandraug+dev@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or modify
