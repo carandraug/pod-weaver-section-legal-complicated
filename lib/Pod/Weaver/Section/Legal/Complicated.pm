@@ -21,10 +21,12 @@ package Pod::Weaver::Section::Legal::Complicated;
 
 use strict;
 use warnings;
+use Module::Load;
 use Moose;
-use Moose::Autobox;
 use MooseX::Types::Moose qw(Bool Int);
 use List::MoreUtils qw(uniq);
+use Pod::Elemental::Element::Nested;
+use Pod::Elemental::Element::Pod5::Ordinary;
 with (
   'Pod::Weaver::Role::Section',
 );
@@ -131,7 +133,10 @@ sub weave_section {
 
   @licenses  = map {
     my $license = "Software::License::$_";
-    eval { $license = $license->new({holder => \@owners}) };
+    eval {
+      load $license;
+      $license = $license->new({holder => \@owners})
+    };
     Carp::croak "Possibly $_ license module not installed: $@" if $@;
     $license;
   } @licenses;
@@ -171,7 +176,7 @@ sub weave_section {
       }),
     ],
   });
-  $document->children->push($text);
+  push ($document->children, $text);
 }
 
 __PACKAGE__->meta->make_immutable;
