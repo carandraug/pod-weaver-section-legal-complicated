@@ -14,11 +14,12 @@ use Pod::Elemental;
 use Pod::Weaver::Config::Assembler;
 
 ## basic usage
-eq_or_diff (weave (<<'IN'), <<'OUT');
+eq_or_diff (weave (<<'IN'),
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   Mary Jane
 # LICENSE: Perl_5
 IN
+<<'OUT');
 =pod
 
 =head1 AUTHOR
@@ -35,13 +36,14 @@ This software is available under the same terms as the perl 5 programming langua
 OUT
 
 ## basic usage with multiple authors and owners
-eq_or_diff (weave (<<'IN'), <<'OUT');
+eq_or_diff (weave (<<'IN'),
 # AUTHOR:  John Doe <john.doe@otherside.com>
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   University of Over Here
 # OWNER:   Mary Jane
 # LICENSE: GPL_3
 IN
+<<'OUT');
 =pod
 
 =head1 AUTHORS
@@ -60,13 +62,14 @@ This software is available under the GNU General Public License, Version 3, June
 OUT
 
 ## test removal of trailing whitespace
-eq_or_diff (weave (<<'IN'), <<'OUT');
+eq_or_diff (weave (<<'IN'),
 # AUTHOR:  John Doe <john.doe@otherside.com>   
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>   
 # OWNER:   University of Over Here    
 # OWNER:   Mary Jane	
 # LICENSE: GPL_3
 IN
+<<'OUT');
 =pod
 
 =head1 AUTHORS
@@ -85,7 +88,7 @@ This software is available under the GNU General Public License, Version 3, June
 OUT
 
 ## multiple authors, owners, and licenses
-eq_or_diff (weave (<<'IN'), <<'OUT');
+eq_or_diff (weave (<<'IN'),
 # AUTHOR:  John Doe <john.doe@otherside.com>
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   University of Over Here
@@ -93,6 +96,7 @@ eq_or_diff (weave (<<'IN'), <<'OUT');
 # LICENSE: GPL_3
 # LICENSE: Perl_5
 IN
+<<'OUT');
 =pod
 
 =head1 AUTHORS
@@ -111,12 +115,13 @@ This software is available under the GNU General Public License, Version 3, June
 OUT
 
 ## test dealing with years
-eq_or_diff (weave (<<'IN'), <<'OUT');
+eq_or_diff (weave (<<'IN'),
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   2005-2007 University of Over Here
 # OWNER:   2006, 2010-2012 Mary Jane
 # LICENSE: GPL_3
 IN
+<<'OUT');
 =pod
 
 =head1 AUTHOR
@@ -133,7 +138,7 @@ This software is available under the GNU General Public License, Version 3, June
 OUT
 
 ## big test with many people, year and licenses
-eq_or_diff (weave (<<'IN'), <<'OUT');
+eq_or_diff (weave (<<'IN'),
 # AUTHOR:  John Doe <john.doe@otherside.com>
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # AUTHOR:  Darcy <darcy@zombies.com>
@@ -144,6 +149,7 @@ eq_or_diff (weave (<<'IN'), <<'OUT');
 # LICENSE: GPL_3
 # LICENSE: Perl_5
 IN
+<<'OUT');
 =pod
 
 =head1 AUTHORS
