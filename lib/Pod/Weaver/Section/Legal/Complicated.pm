@@ -73,6 +73,13 @@ write it).
 I am not a lawyer myself, any feedback on better ways to deal with this kind of
 situations is most welcome.
 
+=head1 NOTE ON DEPENDENCIES
+
+This plugin is dependent on the L<Software::License::*> module of the license
+being used. Since it is not feasible to list them all, only L<Software::License>
+is listed as dependency (of the distribution, even though it is not actually
+used directly.
+
 =cut
 
 =attr add_dist_license
