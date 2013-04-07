@@ -6,7 +6,7 @@ Pod::Weaver::Section::Legal::Complicated - add a pod section with multiple autho
 
 =head1 VERSION
 
-version 1.20
+version 1.21
 
 =head1 SYNOPSIS
 
@@ -58,6 +58,13 @@ Defaults to false.
 =head2 head
 
 Sets the heading level for the legal section. Defaults to 1.
+
+=head1 NOTE ON DEPENDENCIES
+
+This plugin is dependent on the L<Software::License::*> module of the license
+being used. Since it is not feasible to list them all, only L<Software::License>
+is listed as dependency (of the distribution, even though it is not actually
+used directly.
 
 =for Pod::Coverage _extract_comments
 
