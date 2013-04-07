@@ -2,6 +2,7 @@ Summary of important user-visible changes for Pod::Weaver::Section::Legal::Compl
 ---------------------------------------------------------------------------------------
 
 {{$NEXT}}
+  * Bug fix release for perl versions pre 5.14
 
 1.20      2013-04-03 04:54:06 Europe/Dublin
   * We are now able to capture years from the OWNER part which is used on the

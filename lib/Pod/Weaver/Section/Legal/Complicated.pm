@@ -191,13 +191,13 @@ sub weave_section {
   $license_text .= "\n";
   $license_text .= "This software is available under " . _join (@licenses) . ".";
 
-  push ($document->children, Pod::Elemental::Element::Nested->new({
+  push (@{$document->children}, Pod::Elemental::Element::Nested->new({
     command  => "head" . $self->head,
     content  => @authors > 1? "AUTHORS" : "AUTHOR",
     children => [Pod::Elemental::Element::Pod5::Ordinary->new({ content => $author_text })],
   }));
 
-  push ($document->children, Pod::Elemental::Element::Nested->new({
+  push (@{$document->children}, Pod::Elemental::Element::Nested->new({
     command  => "head" . $self->head,
     content  => "COPYRIGHT",
     children => [Pod::Elemental::Element::Pod5::Ordinary->new({ content => $license_text })],
