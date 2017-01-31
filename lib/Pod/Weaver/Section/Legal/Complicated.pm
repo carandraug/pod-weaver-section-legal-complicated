@@ -16,7 +16,7 @@ use utf8;
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, see <http://www.gnu.org/licenses/>.
 
-# ABSTRACT: add a pod section with multiple authors, copyright owners and licenses in a file basis
+# ABSTRACT: Different authors, copyright holders, and licenses for each module.
 # AUTHOR:   Carnë Draug <cdraug@cpan.org>
 # OWNER:    Carnë Draug
 # LICENSE:  GPL_3
