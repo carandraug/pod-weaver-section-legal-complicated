@@ -1,6 +1,5 @@
-## Because the module and test is very sensitive to other plugins, for example,
-## changes in the text returned by the Software::Licenses modules, or extra
-## newlines by POD::Weaver, this test is on xt/ and not ran at installation time.
+#!/usr/bin/env perl
+use utf8;
 
 use strict;
 use warnings;
