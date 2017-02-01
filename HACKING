@@ -1,0 +1,28 @@
+This file describe the rules to use when hacking this project and it
+is not meant to be included in the distribution.
+
+
+* Making changes
+
+Update the Changes file with each commit that includes user-visible
+changes.  This saves having to check the file at the time of release.
+
+
+* Making a release
+
+`dzil' does a lot of things, and we make use of a series of plugins to
+automatically handle the Changes file and git.  It may not be clear
+what needs to be done, so here's the steps:
+
+1. Make sure the working directory is clean `git status'.
+
+2. Run `dzil test -all'.
+
+3. Edit dist.ini to bump the version number.  Do not commit.  The Git
+plugin will make a single commit that bumps the version number in both
+`Changes' and `dist.ini'.  It will also automatically make a
+lightweight version tag.
+
+4. Run `dzil release'.
+
+5. Run `git push --tags'.
