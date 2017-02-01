@@ -1,6 +1,21 @@
 #!/usr/bin/env perl
 use utf8;
 
+## Copyright (C) 2013-2017 Carnë Draug <carandraug+dev@gmail.com>
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 3 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, see <http://www.gnu.org/licenses/>.
+
 use strict;
 use warnings;
 
@@ -12,13 +27,15 @@ use Pod::Weaver;
 use Pod::Elemental;
 use Pod::Weaver::Config::Assembler;
 
-## basic usage
-eq_or_diff (weave (<<'IN'),
+my @tests = (
+  {
+    name => "basic usage",
+    file_in => <<'ENDIN',
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   Mary Jane
 # LICENSE: Perl_5
-IN
-<<'OUT');
+ENDIN
+      file_out => <<'ENDOUT',
 =pod
 
 =head1 AUTHOR
@@ -32,17 +49,19 @@ This software is copyright (c) by Mary Jane.
 This software is available under the same terms as the perl 5 programming language system itself.
 
 =cut
-OUT
+ENDOUT
+  },
 
-## basic usage with multiple authors and owners
-eq_or_diff (weave (<<'IN'),
+  {
+    name => "multiple authors and owners",
+    file_in => <<'ENDIN',
 # AUTHOR:  John Doe <john.doe@otherside.com>
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   University of Over Here
 # OWNER:   Mary Jane
 # LICENSE: GPL_3
-IN
-<<'OUT');
+ENDIN
+    file_out => <<'ENDOUT',
 =pod
 
 =head1 AUTHORS
@@ -58,17 +77,19 @@ This software is copyright (c) by University of Over Here, and by Mary Jane.
 This software is available under the GNU General Public License, Version 3, June 2007.
 
 =cut
-OUT
+ENDOUT
+  },
 
-## test removal of trailing whitespace
-eq_or_diff (weave (<<'IN'),
+  {
+    name => "test removal of trailing whitespace",
+    file_in => <<'ENDIN',
 # AUTHOR:  John Doe <john.doe@otherside.com>   
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>   
 # OWNER:   University of Over Here    
 # OWNER:   Mary Jane	
 # LICENSE: GPL_3
-IN
-<<'OUT');
+ENDIN
+    file_out => <<'ENDOUT',
 =pod
 
 =head1 AUTHORS
@@ -84,18 +105,19 @@ This software is copyright (c) by University of Over Here, and by Mary Jane.
 This software is available under the GNU General Public License, Version 3, June 2007.
 
 =cut
-OUT
-
-## multiple authors, owners, and licenses
-eq_or_diff (weave (<<'IN'),
+ENDOUT
+  },
+  {
+    name => "multiple authors, owners, and licenses",
+    file_in => <<'ENDIN',
 # AUTHOR:  John Doe <john.doe@otherside.com>
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   University of Over Here
 # OWNER:   Mary Jane
 # LICENSE: GPL_3
 # LICENSE: Perl_5
-IN
-<<'OUT');
+ENDIN
+    file_out => <<'ENDOUT',
 =pod
 
 =head1 AUTHORS
@@ -111,16 +133,17 @@ This software is copyright (c) by University of Over Here, and by Mary Jane.
 This software is available under the GNU General Public License, Version 3, June 2007, and the same terms as the perl 5 programming language system itself.
 
 =cut
-OUT
-
-## test dealing with years
-eq_or_diff (weave (<<'IN'),
+ENDOUT
+  },
+  {
+    name => "test dealing with years",
+    file_in => <<'ENDIN',
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # OWNER:   2005-2007 University of Over Here
 # OWNER:   2006, 2010-2012 Mary Jane
 # LICENSE: GPL_3
-IN
-<<'OUT');
+ENDIN
+    file_out => <<'ENDOUT',
 =pod
 
 =head1 AUTHOR
@@ -134,10 +157,11 @@ This software is copyright (c) 2005-2007 by University of Over Here, and 2006, 2
 This software is available under the GNU General Public License, Version 3, June 2007.
 
 =cut
-OUT
-
-## big test with many people, year and licenses
-eq_or_diff (weave (<<'IN'),
+ENDOUT
+  },
+  {
+    name => "big test with many people, year and licenses",
+    file_in => <<'ENDIN',
 # AUTHOR:  John Doe <john.doe@otherside.com>
 # AUTHOR:  Mary Jane <mary.jane@thisside.com>
 # AUTHOR:  Darcy <darcy@zombies.com>
@@ -147,8 +171,8 @@ eq_or_diff (weave (<<'IN'),
 # LICENSE: MIT
 # LICENSE: GPL_3
 # LICENSE: Perl_5
-IN
-<<'OUT');
+ENDIN
+    file_out => <<'ENDOUT',
 =pod
 
 =head1 AUTHORS
@@ -166,10 +190,14 @@ This software is copyright (c) 2005-2007 by University of Over Here, 2006, 2010-
 This software is available under the MIT (X11) License, the GNU General Public License, Version 3, June 2007, and the same terms as the perl 5 programming language system itself.
 
 =cut
-OUT
+ENDOUT
+  },
+);
 
-sub weave {
-  ## This is in part copied from t/legal_section.t in Pod-Weaver-3.101638
+sub weave
+{
+  ## This is in part copied from t/legal_section.t in
+  ## Pod-Weaver-3.101638
   my $perl_source   = shift;
   my $ppi_document  = PPI::Document->new(\$perl_source);
 
@@ -188,3 +216,9 @@ sub weave {
 
   return $woven->as_pod_string;
 }
+
+foreach my $test (@tests)
+  {
+    my $observed = weave ($test->{file_in});
+    eq_or_diff ($observed, $test->{file_out}, $test->{name});
+  }
