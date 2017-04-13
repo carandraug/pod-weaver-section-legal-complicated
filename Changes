@@ -2,6 +2,8 @@ Summary of important user-visible changes for Pod::Weaver::Section::Legal::Compl
 ---------------------------------------------------------------------------------------
 
 {{$NEXT}}
+
+1.23      2017-04-13 17:00:43+01:00 Europe/London
   * Fix typo on TestRequires prerequesites.
 
 1.22      2017-02-01 20:32:45+00:00 Europe/London
