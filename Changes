@@ -2,6 +2,7 @@ Summary of important user-visible changes for Pod::Weaver::Section::Legal::Compl
 ---------------------------------------------------------------------------------------
 
 {{$NEXT}}
+  * Fix typo on TestRequires prerequesites.
 
 1.22      2017-02-01 20:32:45+00:00 Europe/London
   * Made the testsuite available at install time which adds a
