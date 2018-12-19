@@ -25,4 +25,4 @@ lightweight version tag.
 
 4. Run `dzil release'.
 
-5. Run `git push --tags'.
+5. Run `git push --follow-tags'.
